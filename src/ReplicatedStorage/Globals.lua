@@ -41,4 +41,5 @@ module.Maps = module.ReplicatedStorage.Maps
 module.DevMap = module.Maps
 module.DeploymentTemplate = module.GuiTemplates.DeploymentTemplate
 module.DevProductTemplate = module.GuiTemplates.DevProductTemplate
+module.MarketPlaceItemTemplate = module.GuiTemplates.MarketPlaceItemTemplate
 return module
