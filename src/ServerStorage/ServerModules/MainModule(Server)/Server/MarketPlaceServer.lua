@@ -60,7 +60,7 @@ local module = {}
 function module.LoadModule()
     globals.ManipulateMarketData.OnServerInvoke = function(plr, type, data)
         
-        if type == "Sell" then
+        if type == "Purchase" then
             
         end
     end

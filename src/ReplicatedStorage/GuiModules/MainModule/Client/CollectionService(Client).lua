@@ -216,6 +216,17 @@ local functions = {
 			globals.MarketPlaceService:PromptProductPurchase(plr, productId.Value)
 		end)
 	end,
+
+	["MarketPlaceButtonSetup"] = function(button)
+		local categoryLabel = button.Category
+		local currencyLabel = button.Currency
+		local itemLabel = button.Item
+		local key = button.Key
+
+		button.MouseButton1Click:Connect(function()
+			
+		end)
+	end
 }
 
 local InitializeTag = function(tag, tagFunction)
@@ -254,5 +265,7 @@ module.LoadModule = function()
 	InitializeTag("DeploymentButton", "DeploymentButtonSetup")
 	--DevProduct Buttons--
 	InitializeTag("DevProductButtonSetup", "DevProductButtonSetup")
+	--MarketPlace Buttons--
+	InitializeTag("MarketPlaceItemButton", "MarketPlaceButtonSetup")
 end
 return module
