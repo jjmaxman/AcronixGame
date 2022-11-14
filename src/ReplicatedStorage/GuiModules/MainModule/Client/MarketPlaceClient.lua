@@ -17,7 +17,7 @@ function module.LoadModule()
         scrollingFrameList:TweenPosition(UDim2.new(-.1,0,0.216,0), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, .5, true)
     end)
 
-    local newPrompt = purchasePrompt.prompt.new()
-    newPrompt:PromptPurchase("ABCKD", "Hamburger", 10000, "Food")
+    local newPrompt = purchasePrompt.new()
+    newPrompt:PromptPurchase("ABCKD", "Hamburger", 0, "Food")
 end
 return module

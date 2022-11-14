@@ -1,12 +1,14 @@
 --TODO: idk atm lmao
 local globals = require(game:GetService('ReplicatedStorage').Globals)
 local errorMsgCreator = require(globals.ErrorMessageCreator)
+local useFulFunctions = require(game:GetService('ReplicatedStorage').Utilites.UsefulFunctions)
+local data = require(game:GetService("ReplicatedStorage").Utilites.Data)
+local purchasePrompt = require(game:GetService("ReplicatedStorage").Utilites.PurchasePrompt)
 local plr = globals.Players.LocalPlayer
 local plrGui = plr.PlayerGui
 local menu = plrGui:WaitForChild("Menu")
 local mouse = plr:GetMouse()
-local useFulFunctions = require(game:GetService('ReplicatedStorage').Utilites.UsefulFunctions)
-local data = (game:GetService("ReplicatedStorage").Utilites.Data)
+
 local functions = {
 	["SetUpBoolSettings"] = function(frame)
 		local boolButton = frame.BoolButton
@@ -218,13 +220,14 @@ local functions = {
 	end,
 
 	["MarketPlaceButtonSetup"] = function(button)
-		local categoryLabel = button.Category
-		local currencyLabel = button.Currency
-		local itemLabel = button.Item
-		local key = button.Key
+		local categoryLabel = button:WaitForChild('Category')
+		local currencyLabel = button:WaitForChild('Currency')
+		local itemLabel = button:WaitForChild('Item')
+		local data = button:WaitForChild('Data')
 
 		button.MouseButton1Click:Connect(function()
-			
+			local newPrompt = purchasePrompt.new()
+			newPrompt:PromptPurchase(data.Key.Value, data.Item.Value, data.Price.Value)
 		end)
 	end
 }

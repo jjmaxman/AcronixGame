@@ -1,14 +1,15 @@
 local plr = game.Players.LocalPlayer
 local remote = game.ReplicatedStorage.Remotes.MarketPlaceRemotes.ManipulateMarketData
+local globals = require(game:GetService("ReplicatedStorage").Globals)
 
 local module = {}
 module.prompt = {}
 local openPrompt = false
 
 module.prompt.__index = module.prompt
-module.prompt.PurchasePrompt = script.PurchasePrompt
-module.prompt.NotEnoughPrompt = script.NotEnoughPrompt
-function module.prompt.new()
+module.prompt.PurchasePrompt = globals.PurchasePrompt
+module.prompt.NotEnoughPrompt = globals.NotEnoughPrompt
+function module.new()
     return setmetatable({}, module.prompt)
 end
 
@@ -33,19 +34,26 @@ function module.prompt:PromptPurchase(key, item, price, itemType)
             local connections = {}
 
             connections["buyButtonConnection"] = mainFrame.BuyButton.MouseButton1Click:Connect(function()
-                remote:InvokeServer("Purchase", {["Key"] = key, ["ItemType"] = itemType})
+                local result = remote:InvokeServer("Purchase", {["Key"] = key, ["ItemType"] = itemType})
                 MemoryManagement(connections)
                 gui:Destroy()
+                if result then
+                    return true
+                else
+                    return false
+                end
             end)
 
             connections["cancelButtonConnection"] = mainFrame.CancelButton.MouseButton1Click:Connect(function()
                 MemoryManagement(connections)
                 gui:Destroy()
+                return false
             end)
 
             connections["closeButton"] = mainFrame.CloseButton.MouseButton1Click:Connect(function()
                 MemoryManagement(connections)
                 gui:Destroy()
+                return false
             end)
 
 

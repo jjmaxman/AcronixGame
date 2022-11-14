@@ -1,5 +1,8 @@
 local globals = require(game:GetService("ReplicatedStorage").Globals)
 local timeModule = require(game:GetService("ReplicatedStorage").Utilites.TimeModule)
+local gameSettings = game:GetService("ServerStorage")
+local tax = gameSettings.Tax
+local itemExpiration = gameSettings.ItemExpiration
 
 local memoryStores = {"Optics", "Barrel"}
 
@@ -29,7 +32,7 @@ local function SetMemoryStoreData(store, dataToSave)
     local memoryStore = globals.MemoryStoreService:GetSortedMap(store)
     
     local success, errorMessage = function()
-        memoryStore:SetAsync(dataToSave.Key, dataToSave.Value, timeModule.DaysToSeconds(41))
+        memoryStore:SetAsync(dataToSave.Key, dataToSave.Value, timeModule.DaysToSeconds(itemExpiration.Value))
     end
 
     if success then

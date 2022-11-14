@@ -45,4 +45,6 @@ module.DevMap = module.Maps
 module.DeploymentTemplate = module.GuiTemplates.DeploymentTemplate
 module.DevProductTemplate = module.GuiTemplates.DevProductTemplate
 module.MarketPlaceItemTemplate = module.GuiTemplates.MarketPlaceItemTemplate
+module.PurchasePrompt = module.GuiTemplates.PurchasePrompt
+module.NotEnoughPrompt = module.GuiTemplates.NotEnoughPrompt
 return module
