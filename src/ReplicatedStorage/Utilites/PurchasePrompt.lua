@@ -9,6 +9,7 @@ local openPrompt = false
 module.prompt.__index = module.prompt
 module.prompt.PurchasePrompt = globals.PurchasePrompt
 module.prompt.NotEnoughPrompt = globals.NotEnoughPrompt
+module.prompt.PurchaseResultPrompt = globals.PurchaseResultPrompt
 function module.new()
     return setmetatable({}, module.prompt)
 end
@@ -37,11 +38,20 @@ function module.prompt:PromptPurchase(key, item, price, itemType)
                 local result = remote:InvokeServer("Purchase", {["Key"] = key, ["ItemType"] = itemType})
                 MemoryManagement(connections)
                 gui:Destroy()
+                local resultUi = self.PurchaseResultPrompt:Clone()
+                
+                local buttonConnection = resultUi.MainFrame.OkButton.MouseButton1Click:Connect(function()
+                    resultUi:Destroy()
+                    buttonConnection:Disconnect()
+                end)
                 if result then
+                    resultUi.MainFrame.InfoLabel.Text = "Your purchase of "..item.." succeeded!"
                     return true
                 else
+                    resultUi.MainFrame.InfoLabel.Text = "Your purchase of "..item.." failed. Try to purchase this item again, or send a report in our communications links."
                     return false
                 end
+                resultUi.Parent = plr.PlayerGui
             end)
 
             connections["cancelButtonConnection"] = mainFrame.CancelButton.MouseButton1Click:Connect(function()

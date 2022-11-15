@@ -47,4 +47,5 @@ module.DevProductTemplate = module.GuiTemplates.DevProductTemplate
 module.MarketPlaceItemTemplate = module.GuiTemplates.MarketPlaceItemTemplate
 module.PurchasePrompt = module.GuiTemplates.PurchasePrompt
 module.NotEnoughPrompt = module.GuiTemplates.NotEnoughPrompt
+module.PurchaseResultPrompt = module.GuiTemplates.PurchaseResultPrompt
 return module
