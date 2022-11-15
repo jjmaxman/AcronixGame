@@ -12,6 +12,12 @@ task.spawn(function()
 	end
 end)
 
+local testStore = globals.MemoryStoreService:GetSortedMap(memoryStores[4])
+task.spawn(function()
+    testStore:SetAsync("M110;22;userId", {["Price"] = 1000},timeModule.DaysToHours(1))
+end)
+
+
 --Memory Store Utilities (Might make this it's own seperate module if I have to use memorystore service elsewhere)--
 local function GetMemoryStoreData(store, numOfRequestedItems, lowerBound)
 	local memoryStore = globals.MemoryStoreService:GetSortedMap(store)
@@ -76,28 +82,31 @@ end
 
 local module = {}
 function module.LoadModule()
-	globals.ManipulateMarketData.OnServerInvoke = function(plr, type, data)
-		local plrData = plr.PlayerData
-		if table.find(memoryStores, data.Key) then
-			if type == "Purchase" then
-				local item = GetValueFromStore(data.Item, data.Key)
-				if item ~= false then
-					if item.value.Price >= plrData.Rubles.Value then
-                        if RemoveKeyFromStore(data.Item, data.Key) then
-                            return true
-                        else
-                            return false
+    task.spawn(function()
+        globals.ManipulateMarketData.OnServerInvoke = function(plr, type, data)
+            local plrData = plr.PlayerData
+            if table.find(memoryStores, data.Key) then
+                if type == "Purchase" then
+                    local item = GetValueFromStore(data.Item, data.Key)
+                    if item ~= false then
+                        print(item)
+                        if item.value.Price >= plrData.Rubles.Value then
+                            if RemoveKeyFromStore(data.Item, data.Key) then
+                                print("Removed")
+                                return true
+                            else
+                                return false
+                            end
                         end
-					end
-				end
+                    end
 
-            elseif type == "Sell" then
+                elseif type == "Sell" then
 
-			end
-        else
-            warn("Client input was invalid!")
-            return false
-		end
-	end
+                end
+            else
+                return false
+            end
+        end
+    end)
 end
 return module

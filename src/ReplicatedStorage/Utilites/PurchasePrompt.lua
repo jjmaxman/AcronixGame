@@ -14,7 +14,7 @@ function module.new()
     return setmetatable({}, module.prompt)
 end
 
-function module.prompt:PromptPurchase(key, item, price, itemType)
+function module.prompt:PromptPurchase(key, item, price)
     if not openPrompt then
         openPrompt = true
         local playerData = plr:WaitForChild("PlayerData")
@@ -35,7 +35,7 @@ function module.prompt:PromptPurchase(key, item, price, itemType)
             local connections = {}
 
             connections["buyButtonConnection"] = mainFrame.BuyButton.MouseButton1Click:Connect(function()
-                local result = remote:InvokeServer("Purchase", {["Key"] = key, ["ItemType"] = itemType})
+                local result = remote:InvokeServer("Purchase", {["Key"] = key, ["Item"] = item})
                 MemoryManagement(connections)
                 gui:Destroy()
                 local resultUi = self.PurchaseResultPrompt:Clone()
@@ -44,6 +44,7 @@ function module.prompt:PromptPurchase(key, item, price, itemType)
                     resultUi:Destroy()
                     buttonConnection:Disconnect()
                 end)
+                resultUi.Parent = plr.PlayerGui
                 if result then
                     resultUi.MainFrame.InfoLabel.Text = "Your purchase of "..item.." succeeded!"
                     return true
@@ -51,7 +52,6 @@ function module.prompt:PromptPurchase(key, item, price, itemType)
                     resultUi.MainFrame.InfoLabel.Text = "Your purchase of "..item.." failed. Try to purchase this item again, or send a report in our communications links."
                     return false
                 end
-                resultUi.Parent = plr.PlayerGui
             end)
 
             connections["cancelButtonConnection"] = mainFrame.CancelButton.MouseButton1Click:Connect(function()
