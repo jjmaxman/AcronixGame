@@ -40,9 +40,10 @@ function module.prompt:PromptPurchase(key, item, price)
                 gui:Destroy()
                 local resultUi = self.PurchaseResultPrompt:Clone()
                 
-                local buttonConnection = resultUi.MainFrame.OkButton.MouseButton1Click:Connect(function()
-                    resultUi:Destroy()
+                local buttonConnection
+                buttonConnection = resultUi.MainFrame.OkButton.MouseButton1Click:Connect(function()
                     buttonConnection:Disconnect()
+                    resultUi:Destroy()
                 end)
                 resultUi.Parent = plr.PlayerGui
                 if result then

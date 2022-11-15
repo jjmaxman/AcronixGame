@@ -85,7 +85,7 @@ function module.LoadModule()
     task.spawn(function()
         globals.ManipulateMarketData.OnServerInvoke = function(plr, type, data)
             local plrData = plr.PlayerData
-            if table.find(memoryStores, data.Key) then
+            if table.find(memoryStores, data.Item) then
                 if type == "Purchase" then
                     local item = GetValueFromStore(data.Item, data.Key)
                     if item ~= false then
