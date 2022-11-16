@@ -90,7 +90,7 @@ function module.LoadModule()
                     local item = GetValueFromStore(data.Item, data.Key)
                     if item ~= false then
                         print(item)
-                        if item.value.Price >= plrData.Rubles.Value then
+                        if item.Price <= plrData.Rubles.Value then
                             if RemoveKeyFromStore(data.Item, data.Key) then
                                 print("Removed")
                                 return true
