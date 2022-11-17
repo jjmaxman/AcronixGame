@@ -1,43 +1,47 @@
-local data = {}
+local data = 
+	{	
+		["Weaponry"] = {
+			["Primaries"] = 
+			{
+				["Assault Rifles"] =
+				{
+					"M16A3", "AS Val", "G36", "AK74", "AK47", "AK12", "C7A2", "HK416"
+				};
 
-data.Weaponry = {
-	["Primaries"] = 
-	{
-		["Assault Rifles"] =
-		{
-			"M16A3", "AS Val", "G36", "AK74", "AK47", "AK12", "C7A2", "HK416"
-		};
+				["Carbines"] = 
+				{
+					"MK18", "G36C", "Honey Badger"
+				};
 
-		["Carbines"] = 
-		{
-			"MK18", "G36C", "Honey Badger"
-		};
+				["PDWs"] = 
+				{
+					"Kriss Vector"
+				};
 
-		["PDWs"] = 
-		{
-			"Kriss Vector"
-		};
+				["Battle Rifles"] = 
+				{
+					"M1 Garand", "MK14 EBR"
+				};
 
-		["Battle Rifles"] = 
-		{
-			"M1 Garand", "MK14 EBR"
-		};
+				["LMG"] = 
+				{
+					"PKM", "M240"
+				};
 
-		["LMG"] = 
-		{
-			"PKM", "M240"
-		};
+				["DMR"] = 
+				{
+					"SA58"
+				};
 
-		["DMR"] = 
-		{
-			"SA58"
-		};
+				["Sniper Rifle"] = 
+				{
+					"M110", "Kar98k", "Remington 700", "Steyr Scout", "L115A3"
+				};
+			};
 
-		["Sniper Rifle"] = 
-		{
-			"M110", "Kar98k", "Remington 700", "Steyr Scout", "L115A3"
-		};
-	};
-}
+			["Secondaries"] = 
+			{}
+		}
+	}
 
 return data
